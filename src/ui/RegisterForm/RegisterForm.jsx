@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "../RegisterForm/Styles.module.scss";
 
 const RegisterForm = () => {
   const nameRef = useRef();
@@ -33,32 +34,40 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {!isValid ? (
-        <>
-          <div className="input-field">
-            <input type="text" ref={nameRef} />
+    <div className={styles.form}>
+      <form onSubmit={handleSubmit}>
+        {!isValid ? (
+          <>
+            <div className={styles.field}>
+              <input type="text" ref={nameRef} placeholder="Имя" required />
+            </div>
+            <div className={styles.field}>
+              <input type="text" ref={surnameRef} placeholder="Фамилия" />
+            </div>
+            <div className={styles.field}>
+              <input type="text" ref={emailRef} placeholder="Почта" />
+            </div>
+            <div className={styles.field}>
+              <input type="password" ref={passwordRef} placeholder="Пароль" />
+            </div>
+            <div className={styles.field}>
+              <input
+                type="password"
+                ref={confirmPasswordRef}
+                placeholder="Подтверждение пароля"
+              />
+            </div>
+          </>
+        ) : (
+          <div className={styles.field}>
+            <input type="text" ref={verifyCodeRef} />
           </div>
-          <div className="input-field">
-            <input type="text" ref={surnameRef} />
-          </div>
-          <div className="input-field">
-            <input type="text" ref={emailRef} />
-          </div>
-          <div className="input-field">
-            <input type="password" ref={passwordRef} />
-          </div>
-          <div className="input-field">
-            <input type="password" ref={confirmPasswordRef} />
-          </div>
-        </>
-      ) : (
-        <div className="input-field">
-          <input type="text" ref={verifyCodeRef} />
-        </div>
-      )}
-      <button type="submit"></button>
-    </form>
+        )}
+        <button type="submit">
+          {!isValid ? "Зарегистрироваться" : "Подтвердить"}
+        </button>
+      </form>
+    </div>
   );
 };
 
