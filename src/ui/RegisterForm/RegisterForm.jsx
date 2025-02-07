@@ -15,6 +15,12 @@ const RegisterForm = () => {
 
   const [isValid, setIsValid] = useState(false);
 
+  const [isError, setIsError] = useState(false);
+
+  const proverka = () => {
+    setIsError(!isError);
+  };
+
   const submitForm = () => {
     if (isValid) {
       // api code verification
@@ -24,7 +30,7 @@ const RegisterForm = () => {
       // api register validation
       // api code send
       // setIsValid(true)
-    } catch (error) {}
+    } catch (err) {}
   };
 
   const handleSubmit = (e) => {
@@ -34,40 +40,60 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className={styles.form}>
-      <form onSubmit={handleSubmit}>
+    <>
+      <form onSubmit={handleSubmit} className={styles.login_form}>
         {!isValid ? (
           <>
-            <div className={styles.field}>
-              <input type="text" ref={nameRef} placeholder="Имя" required />
-            </div>
-            <div className={styles.field}>
-              <input type="text" ref={surnameRef} placeholder="Фамилия" />
-            </div>
-            <div className={styles.field}>
-              <input type="text" ref={emailRef} placeholder="Почта" />
-            </div>
-            <div className={styles.field}>
-              <input type="password" ref={passwordRef} placeholder="Пароль" />
-            </div>
-            <div className={styles.field}>
-              <input
-                type="password"
-                ref={confirmPasswordRef}
-                placeholder="Подтверждение пароля"
-              />
-            </div>
+            <input
+              type="text"
+              ref={nameRef}
+              placeholder="Имя"
+              required
+              className={isError ? styles.error : null}
+            />
+            {isError && <label>текст ошибки</label>}
+            <input
+              type="text"
+              ref={surnameRef}
+              placeholder="Фамилия"
+              required
+              className={isError ? styles.error : null}
+            />
+            {isError && <label>текст ошибки</label>}
+            <input
+              type="email"
+              ref={emailRef}
+              placeholder="Почта"
+              required
+              className={isError ? styles.error : null}
+            />
+            {isError && <label>текст ошибки</label>}
+            <input
+              type="password"
+              ref={passwordRef}
+              placeholder="Пароль"
+              required
+              className={isError ? styles.error : null}
+            />
+            {isError && <label>текст ошибки</label>}
+            <input
+              type="password"
+              ref={confirmPasswordRef}
+              placeholder="Подтверждение пароля"
+              required
+              className={isError ? styles.error : null}
+            />
+            {isError && <label>текст ошибки</label>}
           </>
         ) : (
-          <div className={styles.field}>
-            <input type="text" ref={verifyCodeRef} />
-          </div>
+          <input type="text" ref={verifyCodeRef} required />
         )}
         <button type="submit">
-          {!isValid ? "Зарегистрироваться" : "Подтвердить"}
+          {!isValid ? "Регистрация" : "Подтвердить"}
         </button>
       </form>
-    </div>
+      <button onClick={() => proverka()}>proverka</button>
+    </>
   );
 };
 

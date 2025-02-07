@@ -2,6 +2,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaEyeSlash, FaEye } from "react-icons/fa";
+import styles from "./Styles.module.scss";
 
 const LoginForm = () => {
   const passwordRef = useRef();
@@ -12,6 +13,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const [isValid, setIsValid] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const [passCheck, setPassCheck] = useState({
     check: false,
@@ -35,37 +37,26 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {isValid ? (
+    <form onSubmit={handleSubmit} className={styles.login_form}>
+      {!isValid ? (
         <>
-          <div className="login-input">
-            <FaUser />
-            <input type="text" ref={emailRef} placeholder="Почта" required />
-          </div>
-          <div className="login-input">
-            {passCheck.check ? (
-              <FaEyeSlash
-                size={25}
-                onClick={() => setPassCheck({ check: false, type: "password" })}
-              />
-            ) : (
-              <FaEye
-                size={25}
-                onClick={() => setPassCheck({ check: true, type: "text" })}
-              />
-            )}
-            <input
-              type={passCheck.type}
-              ref={passwordRef}
-              placeholder="Пароль"
-              required
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Почта"
+            required
+            className={isError ? styles.error : null}
+          />
+          {isError && <label>текст ошибки</label>}
+          <input
+            type="password"
+            placeholder="Пароль"
+            required
+            className={isError ? styles.error : null}
+          />
+          {isError && <label>текст ошибки</label>}
         </>
       ) : (
-        <div className="login-input">
-          <input type="text" ref={verifyCodeRef} />
-        </div>
+        <input type="text" ref={verifyCodeRef} placeholder="huy" />
       )}
       <button type="submit">Войти</button>
     </form>

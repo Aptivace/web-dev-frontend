@@ -1,4 +1,5 @@
 @use "./Colors.scss" as c;
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -7,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: c.$base;
+  background-color: var(--base);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,7 +28,7 @@ a:hover {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: var(--base);
   }
   a:hover {
     color: #747bff;
