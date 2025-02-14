@@ -1,0 +1,15 @@
+.new_site_btn {
+  cursor: pointer;
+  background-color: var(--lavender);
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid var(--lavender);
+  font-size: 20px;
+  transition: 0.3s;
+  color: var(--base);
+  font-family: "JetBrains Mono";
+
+  &:active {
+    scale: 0.95;
+  }
+}

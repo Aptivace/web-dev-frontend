@@ -1,0 +1,47 @@
+.prompt {
+  position: fixed;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  transform: translateX(7.5%);
+  font-family: "JetBrains Mono";
+
+  label {
+    display: flex;
+  }
+
+  input {
+    width: 700px;
+    font-size: 20px;
+    padding: 20px;
+    border: 2px solid var(--surface);
+    border-radius: 10px;
+    outline: none;
+    color: var(--text);
+    font-family: "JetBrains Mono";
+
+    &:valid ~ button {
+      background-color: var(--green);
+      color: var(--base);
+    }
+  }
+
+  button {
+    font-size: 20px;
+    padding: 20px 30px;
+    margin: 0 30px;
+    border: 2px solid var(--surface);
+    border-radius: 10px;
+    transition: 0.3s;
+    color: var(--text);
+  }
+}
+
+.empty {
+  position: fixed;
+  top: 0 !important;
+  bottom: 0 !important;
+}
