@@ -11,10 +11,7 @@ const Prompt = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={styles.prompt + " " + styles.empty}
-    >
+    <form onSubmit={handleSubmit} className={styles.prompt}>
       <input type="text" placeholder="Введите запрос..." required />
       <button>
         <FaArrowRight />

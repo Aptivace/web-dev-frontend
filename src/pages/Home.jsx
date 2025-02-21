@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import Prompt from "../ui/Prompt/Prompt";
 import LoginForm from "../ui/LoginForm/LoginForm";
 import SideBar from "../ui/SideBar/SideBar";
+import MessageContainer from "../components/MessageContainer/MessageContainer";
 
 const Home = () => {
   const [isAuth, setIsAuth] = useState(true);
@@ -12,6 +13,7 @@ const Home = () => {
       {isAuth ? (
         <>
           <SideBar />
+          <MessageContainer />
           <Prompt />
         </>
       ) : (
