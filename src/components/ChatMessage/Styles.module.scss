@@ -1,0 +1,18 @@
+.message {
+  width: 30%;
+  padding: 10px;
+  display: inline-flex;
+  background-color: var(--surface1);
+  color: var(--text);
+  font-size: 8px;
+  margin-left: auto;
+  border: 2px solid var(--surface1);
+  border-radius: 10px;
+}
+
+.bot {
+  margin: 0 !important;
+  margin-right: auto !important;
+  background-color: var(--surface0) !important;
+  border-color: var(--surface0) !important;
+}

@@ -1,10 +1,11 @@
 .container {
-  position: fixed;
-  top: 0;
-  width: 50%;
-  right: 0;
-  // display: flex;
+  display: flex;
+  margin: 0 auto;
+  width: 90%;
+  grid-row: 1;
+  grid-column-start: 2;
+  grid-column-end: 3;
   flex-direction: column;
-  background-color: red;
-  transform: translateX(-35%);
+  gap: 20px;
+  margin-top: 50px;
 }

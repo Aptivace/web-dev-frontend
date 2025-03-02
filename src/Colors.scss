@@ -7,10 +7,11 @@
   --lavender: #b4befe;
   --base: #1e1e2e;
   --text: #cdd6f4;
+  --surface0: #313244;
+  --surface1: #45475a;
   --surface: #585b70;
   --subtext: #a6adc8;
   --green: #a6e3a1;
-  --surface0: #313244;
 }
 
 @media (prefers-color-scheme: light) {
@@ -27,5 +28,6 @@
     --subtext: #6c6f85;
     --green: #40a02b;
     --surface0: #ccd0da;
+    --surface1: #bcc0cc;
   }
 }

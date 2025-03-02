@@ -1,22 +1,18 @@
 // @import "../../index.scss";
 
 .prompt {
-  position: fixed;
-  bottom: 10%;
-  left: 0;
-  right: 0;
-  align-items: center;
-  justify-content: center;
   display: flex;
-  transform: translateX(7.5%);
-  // font-family: "JetBrains Mono";
+  grid-row: 2;
+  justify-content: center;
+  height: 70px;
+  margin-bottom: 50px;
 
   label {
     display: flex;
   }
 
   input {
-    width: 700px;
+    width: 80%;
     font-size: 20px;
     padding: 20px;
     border: 2px solid var(--surface);
