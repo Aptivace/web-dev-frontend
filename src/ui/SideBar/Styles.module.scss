@@ -1,4 +1,7 @@
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   grid-row-start: 1;
   grid-row-end: 3;
   padding: 20px;

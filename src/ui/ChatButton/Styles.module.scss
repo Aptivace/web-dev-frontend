@@ -1,0 +1,16 @@
+.btn {
+  cursor: pointer;
+  font-size: 20px;
+  width: 100%;
+  // margin: 10px 0;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  text-align: left;
+  padding: 10px;
+  transition: 0.2s ease-in;
+
+  &:hover {
+    background-color: var(--surface1);
+  }
+}
