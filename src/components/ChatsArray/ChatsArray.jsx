@@ -6,13 +6,11 @@ import styles from "./Styles.module.scss";
 const ChatsArray = () => {
   const { chats } = useChatStore();
 
-  console.log(chats.length);
-
   return (
     <div className={styles.chats}>
       {chats.length ? (
         chats.map((chat) => {
-          return <ChatButton key={chat.id} name={chat.name} />;
+          return <ChatButton key={chat.id} {...chat} />;
         })
       ) : (
         <h1>Чатов нет.</h1>

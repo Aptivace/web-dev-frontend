@@ -10,17 +10,11 @@ const Home = () => {
   const [isAuth, setIsAuth] = useState(true);
 
   return (
-    <>
-      {isAuth ? (
-        <div className={styles.container}>
-          <SideBar />
-          <MessageContainer />
-          <Prompt />
-        </div>
-      ) : (
-        <Navigate to="/login" />
-      )}
-    </>
+    <div className={styles.container}>
+      <SideBar />
+      <MessageContainer />
+      <Prompt />
+    </div>
   );
 };
 
