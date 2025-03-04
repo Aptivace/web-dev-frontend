@@ -1,5 +1,6 @@
 .message {
-  width: 30%;
+  min-width: 5%;
+  max-width: fit-content;
   padding: 10px;
   display: inline-flex;
   background-color: var(--surface1);
