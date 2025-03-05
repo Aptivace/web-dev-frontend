@@ -10,7 +10,7 @@ const PrivateLayout = () => {
   // useEffect(() => {
   //   const fetchUser = async () => {
   //     try {
-  //       await axios.post("/profile");
+  //       await axios.get("/profile");
   //       setIsAuth(true);
   //     } catch (error) {
   //       setIsAuth(false);

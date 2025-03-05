@@ -50,19 +50,14 @@ const RegisterForm = () => {
 
   const submitLastStep = async () => {
     try {
-      const res = await axios.post(
-        "/auth/verify",
-        {
-          email: formData.email,
-          verify_code: formData.verifyCode,
-        },
-        { withCredentials: true }
-      );
+      const res = await axios.post("/auth/verify", {
+        email: formData.email,
+        verify_code: formData.verifyCode,
+      });
 
       const resData = await res.data;
       console.log(resData);
-      console.log(resData.credentials);
-      navigate("/");
+      navigate("/chats");
     } catch (err) {
       console.log(err);
     }

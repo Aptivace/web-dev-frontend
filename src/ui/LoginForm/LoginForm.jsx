@@ -20,17 +20,13 @@ const LoginForm = () => {
 
   const submitForm = async () => {
     try {
-      const res = await axios.post(
-        "/auth/login",
-        {
-          email: formData.email,
-          password: formData.password,
-        },
-        { withCredentials: true }
-      );
+      const res = await axios.post("/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      });
       const resData = await res.data;
       console.log(resData);
-      navigate("/");
+      navigate("/chats");
     } catch (error) {
       console.log(error);
     }

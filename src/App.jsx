@@ -9,11 +9,11 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Navigate to="/myChats" replace />} />
+        <Route index element={<Navigate to="/chats" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>
-      <Route path="/myChats" element={<PrivateLayout />}>
+      <Route path="/chats" element={<PrivateLayout />}>
         <Route index element={<Home />} />
       </Route>
     </Routes>
