@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useChatStore from "../../store/chatStore";
 import ChatButton from "../../ui/ChatButton/ChatButton";
 import styles from "./Styles.module.scss";
+import axios from "../../api/axios";
 
 const ChatsArray = () => {
-  const { chats } = useChatStore();
+  const { chats, setChats } = useChatStore();
+
+  useEffect(() => {
+    const fetchChats = async () => {
+      const res = await axios.get("/chats");
+      const resData = await res.data;
+      setChats(resData.data.items);
+    };
+    fetchChats();
+    console.log(chats);
+  }, []);
 
   return (
     <div className={styles.chats}>

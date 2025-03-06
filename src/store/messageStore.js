@@ -1,38 +1,49 @@
 import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+import axios from "../api/axios";
+import { v4 as uuidv4 } from "uuid";
 
-const useMessageStore = create((set) => ({
-  messages: [],
+const useMessageStore = create(
+  immer((set) => ({
+    messages: [],
+    loading: false,
+    error: null,
+    // Установить весь список сообщений
+    setMessages: (messageArr) =>
+      set({ messages: messageArr, loading: false, error: null }),
 
-  // Установить весь список сообщений
-  setMessages: (messageArr) => set({ messages: messageArr }),
+    addMessage: async (userMessage, chatId) => {
+      const tempId = uuidv4();
 
-  // Добавить новое сообщение
-  addMessage: (newMessage) =>
-    set((state) => {
-      // Получаем id последнего сообщения
-      const lastId =
-        state.messages.length > 0
-          ? state.messages[state.messages.length - 1].id
-          : 0;
+      set((state) => {
+        state.messages.push({
+          id: tempId, // Исправлено: используется tempId
+          user_message: userMessage,
+          bot_message: null, // Это заглушка, будет заменено после API запроса
+        });
+      });
+      try {
+        const res = await axios.post(`/chat/${chatId}/send`, {
+          user_message: userMessage,
+        });
+        const resData = await res.data;
+        console.log(resData.data.bot_message);
 
-      // Создаем новое сообщение с id = lastId + 1
-      const messageWithId = {
-        ...newMessage,
-        id: lastId + 1,
-        bot_message: null,
-      };
-
-      // Возвращаем обновленный массив сообщений
-      return { messages: [...state.messages, messageWithId] };
-    }),
-
-  // Обновить bot_message в существующем сообщении
-  updateBotMessage: (id, newBotMessage) =>
-    set((state) => ({
-      messages: state.messages.map((msg) =>
-        msg.id === id ? { ...msg, bot_message: newBotMessage } : msg
-      ),
-    })),
-}));
+        set((state) => {
+          const index = state.messages.findIndex((msg) => msg.id === tempId);
+          if (index !== -1) {
+            state.messages[index] = {
+              id: tempId,
+              user_message: userMessage,
+              bot_message: resData.data.bot_message,
+            };
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }))
+);
 
 export default useMessageStore;

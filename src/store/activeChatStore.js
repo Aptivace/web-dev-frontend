@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
 const useActiveChatStore = create((set) => ({
-  activeChatId: "",
+  activeChat: false,
 
-  setActiveChatId: (id) => set({ activeChatId: id }),
+  setActiveChatId: (newActiveChat) => set({ activeChat: newActiveChat }),
 }));
 
 export default useActiveChatStore;

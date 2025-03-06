@@ -2,8 +2,11 @@ import React from "react";
 import styles from "./Styles.module.scss";
 import { useState } from "react";
 import { delay, motion } from "framer-motion";
+import useActiveChatStore from "../../store/activeChatStore";
 
 const UserMessage = ({ user_message, bot_message }) => {
+  const { activeChat } = useActiveChatStore();
+  console.log(activeChat);
   return (
     <>
       <motion.div
@@ -19,7 +22,17 @@ const UserMessage = ({ user_message, bot_message }) => {
         transition={{ delay: 0.5 }}
         className={styles.message + " " + styles.bot}
       >
-        <h1>{bot_message ? bot_message : "ВъебАИ ебашит..."}</h1>
+        <h1>
+          {bot_message ? (
+            <>
+              {bot_message}
+              {"."} Ваш новый лендинг:{" "}
+              <a href={activeChat.siteLink}>{activeChat.name}</a>
+            </>
+          ) : (
+            "ВъебАИ ебашит..."
+          )}
+        </h1>
       </motion.div>
     </>
   );

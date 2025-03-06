@@ -7,8 +7,8 @@ import axios from "../../api/axios";
 import useActiveChatStore from "../../store/activeChatStore";
 
 const Prompt = () => {
-  const { addMessage } = useMessageStore();
-  const { activeChatId } = useActiveChatStore();
+  const { messages, addMessage, updateBotMessage } = useMessageStore();
+  const { activeChat } = useActiveChatStore();
 
   const [promptText, setPromptText] = useState("");
 
@@ -20,38 +20,36 @@ const Prompt = () => {
 
   const sendMessage = async () => {
     try {
-      const res = await axios.post(`/chat/${activeChatId}/send`, {
-        user_message: promptText,
-      });
-      const resData = await res.data;
-      addMessage({
-        user_message: promptText,
-      });
-      console.log(resData);
+      await addMessage(promptText, activeChat.id);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    sendMessage();
+    await sendMessage();
+    console.log(messages);
     setPromptText("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.prompt}>
-      <input
-        type="text"
-        value={promptText}
-        onChange={handleChange}
-        placeholder="Введите запрос..."
-        required
-      />
-      <button>
-        <FaArrowRight />
-      </button>
-    </form>
+    <>
+      {activeChat && (
+        <form onSubmit={handleSubmit} className={styles.prompt}>
+          <input
+            type="text"
+            value={promptText}
+            onChange={handleChange}
+            placeholder="Введите запрос..."
+            required
+          />
+          <button>
+            <FaArrowRight />
+          </button>
+        </form>
+      )}
+    </>
   );
 };
 

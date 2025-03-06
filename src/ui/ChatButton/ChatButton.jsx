@@ -5,21 +5,27 @@ import { useState } from "react";
 import useChatStore from "../../store/chatStore";
 import axios from "../../api/axios";
 import useMessageStore from "../../store/messageStore";
+import useActiveChatStore from "../../store/activeChatStore";
 
-const ChatButton = ({ id, name }) => {
+const ChatButton = ({ id, name, site_link }) => {
   const [isHover, setIsHover] = useState(false);
 
   const { deleteChat } = useChatStore();
   const { setMessages } = useMessageStore();
+  const { setActiveChatId, activeChat } = useActiveChatStore();
 
   const fetchMessages = async () => {
-    // try {
-    //   const res = await axios.get(`/chat/${id}`);
-    //   const resData = await res.data;
-    //   setMessages(resData.items);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    if (id !== activeChat.id) {
+      try {
+        const res = await axios.get(`/chat/${id}`);
+        const resData = await res.data;
+        setActiveChatId({ id: id, name: name, siteLink: site_link });
+        setMessages(resData.data.items);
+        console.log(resData.data.items);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const handleMouseEnter = () => {

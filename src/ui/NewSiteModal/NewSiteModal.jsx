@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Styles.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
+import axios from "../../api/axios";
+import useChatStore from "../../store/chatStore";
 
 const NewSiteModal = ({ setIsClicked }) => {
   const modalRef = useRef();
+  const [formData, setFormData] = useState({
+    chatName: "",
+  });
+
+  const { addChat } = useChatStore();
 
   useEffect(() => {
     let handler = (e) => {
@@ -19,9 +26,28 @@ const NewSiteModal = ({ setIsClicked }) => {
     };
   }, [setIsClicked]);
 
+  const submitName = async () => {
+    try {
+      const res = await axios.post("/chat", { name: formData.chatName });
+      const resData = await res.data;
+      addChat(resData.data);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // newChat add
+    if (submitName()) {
+      setIsClicked(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -34,7 +60,14 @@ const NewSiteModal = ({ setIsClicked }) => {
     >
       <form onSubmit={handleSubmit} ref={modalRef}>
         <h1>Созданние новго проекта</h1>
-        <input type="text" placeholder="Введите имя..." required />
+        <input
+          type="text"
+          name="chatName"
+          placeholder="Введите имя..."
+          value={formData.chatName}
+          onChange={handleChange}
+          required
+        />
         <button type="submit">Создать</button>
       </form>
     </motion.div>
