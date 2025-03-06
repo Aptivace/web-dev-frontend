@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import { useState } from "react";
 import { delay, motion } from "framer-motion";
 import useActiveChatStore from "../../store/activeChatStore";
@@ -27,7 +27,9 @@ const UserMessage = ({ user_message, bot_message }) => {
             <>
               {bot_message}
               {"."} Ваш новый лендинг:{" "}
-              <a href={activeChat.siteLink}>{activeChat.name}</a>
+              <a target="_blank" href={activeChat.siteLink}>
+                {activeChat.name}
+              </a>
             </>
           ) : (
             "ВъебАИ ебашит..."

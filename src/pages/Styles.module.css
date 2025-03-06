@@ -2,5 +2,4 @@
   display: grid;
   grid-template-columns: 20% auto;
   grid-template-rows: 85vh 15vh;
-  // column-gap: 50px;
 }

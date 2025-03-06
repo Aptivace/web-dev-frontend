@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../RegisterForm/Styles.module.scss";
+import styles from "../RegisterForm/Styles.module.css";
 import axios from "../../api/axios";
 
 const RegisterForm = () => {

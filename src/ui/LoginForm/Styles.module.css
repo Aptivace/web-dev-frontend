@@ -1,19 +1,17 @@
-@use "../../Colors.scss" as c;
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 .login_form {
   display: flex;
   flex-direction: column;
   background-color: var(--base);
-  width: 30%;
+  width: 20%;
   margin: auto;
   margin-top: 10%;
-  // gap: 20px;
 
   input {
     font-family: "JetBrains Mono", serif;
     margin-top: 20px;
-    padding: 20px;
+    padding: 15px;
     background-color: transparent;
     font-size: 20px;
     color: var(--text);

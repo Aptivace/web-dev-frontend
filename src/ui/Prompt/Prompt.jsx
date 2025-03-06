@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import useMessageStore from "../../store/messageStore";
 import axios from "../../api/axios";
 import useActiveChatStore from "../../store/activeChatStore";

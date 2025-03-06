@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import { FaTrash } from "react-icons/fa6";
 import { useState } from "react";
 import useChatStore from "../../store/chatStore";

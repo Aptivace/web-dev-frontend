@@ -1,6 +1,6 @@
 import React from "react";
 import NewSiteBtn from "../NewSiteBtn/NewSiteBtn";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import ChatsArray from "../../components/ChatsArray/ChatsArray";
 
 const SideBar = () => {

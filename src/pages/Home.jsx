@@ -4,7 +4,7 @@ import Prompt from "../ui/Prompt/Prompt";
 import LoginForm from "../ui/LoginForm/LoginForm";
 import SideBar from "../ui/SideBar/SideBar";
 import MessageContainer from "../components/MessageContainer/MessageContainer";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 
 const Home = () => {
   const [isAuth, setIsAuth] = useState(true);

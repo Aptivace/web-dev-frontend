@@ -1,5 +1,3 @@
-// @import "../../index.scss";
-
 .prompt {
   display: flex;
   grid-row: 2;
@@ -19,7 +17,6 @@
     border-radius: 10px;
     outline: none;
     color: var(--text);
-    // font-family: "JetBrains Mono";
 
     &:valid ~ button {
       background-color: var(--green);

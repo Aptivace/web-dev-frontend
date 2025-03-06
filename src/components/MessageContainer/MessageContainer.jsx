@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ChatMessage from "../ChatMessage/ChatMessage";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import useMessageStore from "../../store/messageStore";
 import EmptyChat from "../EmptyChat/EmptyChat";
 import useActiveChatStore from "../../store/activeChatStore";

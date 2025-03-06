@@ -2,7 +2,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaEyeSlash, FaEye } from "react-icons/fa";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import axios from "../../api/axios";
 
 const LoginForm = () => {

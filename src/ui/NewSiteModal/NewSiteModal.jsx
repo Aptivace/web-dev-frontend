@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
 import axios from "../../api/axios";

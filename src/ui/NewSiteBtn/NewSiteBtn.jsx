@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Styles.module.scss";
+import styles from "./Styles.module.css";
 import { useState } from "react";
 import NewSiteModal from "../NewSiteModal/NewSiteModal";
 import { AnimatePresence } from "framer-motion";

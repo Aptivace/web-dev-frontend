@@ -16,13 +16,13 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --rosewater: #dc8a78; // Измени значения для светлой темы
+    --rosewater: #dc8a78;
     --flamingo: #dd7878;
     --peach: #fe640b;
     --red: #d20f39;
     --yellow: #df8e1d;
     --lavender: #b4befe;
-    --base: #eff1f5; // Пример изменения для светлой темы
+    --base: #eff1f5;
     --text: #4c4f69;
     --surface: #acb0be;
     --subtext: #6c6f85;
