@@ -7,8 +7,6 @@ import MessageContainer from "../components/MessageContainer/MessageContainer";
 import styles from "./Styles.module.css";
 
 const Home = () => {
-  const [isAuth, setIsAuth] = useState(true);
-
   return (
     <div className={styles.container}>
       <SideBar />

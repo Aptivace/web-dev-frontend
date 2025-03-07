@@ -9,6 +9,7 @@
   left: 0;
   background-color: transparent;
   backdrop-filter: brightness(50%);
+  z-index: 3;
 
   form {
     text-align: center;

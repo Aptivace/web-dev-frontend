@@ -4,9 +4,7 @@ import { useState } from "react";
 import { delay, motion } from "framer-motion";
 import useActiveChatStore from "../../store/activeChatStore";
 
-const UserMessage = ({ user_message, bot_message }) => {
-  const { activeChat } = useActiveChatStore();
-  console.log(activeChat);
+const UserMessage = ({ user_message, bot_message, chatName, siteLink }) => {
   return (
     <>
       <motion.div
@@ -27,8 +25,8 @@ const UserMessage = ({ user_message, bot_message }) => {
             <>
               {bot_message}
               {"."} Ваш новый лендинг:{" "}
-              <a target="_blank" href={activeChat.siteLink}>
-                {activeChat.name}
+              <a target="_blank" href={siteLink}>
+                {chatName}
               </a>
             </>
           ) : (

@@ -5,6 +5,7 @@ import useMessageStore from "../../store/messageStore";
 import EmptyChat from "../EmptyChat/EmptyChat";
 import useActiveChatStore from "../../store/activeChatStore";
 import axios from "../../api/axios";
+import Cube from "../Cube/Cube";
 
 const MessageContainer = () => {
   const { messages } = useMessageStore();
@@ -23,7 +24,7 @@ const MessageContainer = () => {
   if (!activeChat) {
     return (
       <div className={styles.container}>
-        <h1>Заглушка</h1>
+        <Cube />
       </div>
     );
   }
@@ -31,7 +32,14 @@ const MessageContainer = () => {
   return (
     <div className={styles.container} ref={scrollRef}>
       {messages.length ? (
-        messages.map((msg) => <ChatMessage key={msg.id} {...msg} />)
+        messages.map((msg) => (
+          <ChatMessage
+            key={msg.id}
+            {...msg}
+            chatName={activeChat.name}
+            siteLink={activeChat.siteLink}
+          />
+        ))
       ) : (
         <EmptyChat />
       )}

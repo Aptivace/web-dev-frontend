@@ -1,4 +1,12 @@
 .chats {
   border-top: 1px solid var(--surface1);
-  padding-top: 8px;
+  border-bottom: 1px solid var(--surface1);
+  padding: 8px 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

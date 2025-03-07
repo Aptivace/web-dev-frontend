@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "../api/axios";
-// import Menu from "../components/Menu";
+import second from "../store/userStore";
+import useUserStore from "../store/userStore";
 
 const PrivateLayout = () => {
+  const { setUserData } = useUserStore();
   const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -12,8 +14,8 @@ const PrivateLayout = () => {
       try {
         const res = await axios.get("/profile");
         const resData = await res.data;
+        setUserData(resData.data.profile);
         setIsAuth(true);
-        console.log(resData);
       } catch (error) {
         console.log(error);
         setIsAuth(false);

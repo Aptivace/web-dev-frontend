@@ -1,0 +1,17 @@
+.user {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: 0.3s;
+
+  svg:nth-last-child(1) {
+    margin-left: auto;
+  }
+
+  &:hover {
+    background-color: var(--surface1);
+  }
+}
