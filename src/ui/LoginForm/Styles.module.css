@@ -1,15 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-
-.login_form {
+.form {
   display: flex;
   flex-direction: column;
   background-color: var(--base);
-  width: 20%;
+  width: 50%;
   margin: auto;
-  margin-top: 10%;
+  text-align: center;
+
+  h1 {
+    color: var(--text);
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
 
   input {
-    font-family: "JetBrains Mono", serif;
     margin-top: 20px;
     padding: 15px;
     background-color: transparent;
@@ -36,7 +39,7 @@
   button {
     cursor: pointer;
     font-family: "JetBrains Mono", serif;
-    margin-top: 20px;
+    margin-top: 40px;
     padding: 20px;
     border-radius: 15px;
     border: 2px solid var(--lavender);
@@ -52,6 +55,14 @@
     }
   }
 
+  p {
+    margin-top: 20px;
+    color: var(--subtext);
+  }
+  a {
+    color: var(--lavender);
+  }
+
   label {
     color: var(--red);
   }
@@ -59,4 +70,8 @@
 
 .error {
   border-color: var(--red) !important;
+}
+
+.errorText {
+  color: var(--red) !important;
 }

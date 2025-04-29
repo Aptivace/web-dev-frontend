@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../RegisterForm/Styles.module.css";
 import axios from "../../api/axios";
 
@@ -18,17 +17,15 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const [isValid, setIsValid] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const [validateError, setValidateError] = useState({
     email: "",
     password: "",
     passwordConfirm: "",
     inviteCode: "",
+    errorPlaceHolder: "",
   });
-
-  const proverka = () => {
-    setIsError(!isError);
-  };
 
   const submitFirstStep = async () => {
     try {
@@ -42,9 +39,35 @@ const RegisterForm = () => {
       });
       const resData = await res.data;
       console.log(resData);
-      setIsValid(true);
     } catch (err) {
-      console.log(err);
+      setIsError(true);
+      if (!err.response) {
+        return console.log("pidors");
+      }
+      if (err.response.status === 422) {
+        if (err.response.data.errors.email) {
+          setValidateError((prev) => ({
+            ...prev,
+            email: "Почта указана неправильно",
+          }));
+        }
+        if (err.response.data.errors.password) {
+          setValidateError((prev) => ({
+            ...prev,
+            password: "Пароль не указан / указан неправильно",
+          }));
+        }
+      }
+      if (err.response.status === 400) {
+        setValidateError((prev) => ({
+          ...prev,
+          inviteCode:
+            "На этот инвайт код превышено кол-во регистраций. Введите другой!",
+        }));
+      }
+    }
+    if (!isError) {
+      setIsValid(true);
     }
   };
 
@@ -125,6 +148,7 @@ const RegisterForm = () => {
       <form onSubmit={handleSubmit} className={styles.login_form}>
         {!isValid ? (
           <>
+            <h1>Регистрация</h1>
             <input
               type="text"
               name="firstName"
@@ -189,18 +213,26 @@ const RegisterForm = () => {
             )}
           </>
         ) : (
-          <input
-            type="text"
-            name="verifyCode"
-            placeholder="Код подтверждения"
-            value={formData.verifyCode}
-            onChange={handleChange}
-            required
-          />
+          <>
+            <h1>Верификация</h1>
+            <input
+              type="text"
+              name="verifyCode"
+              placeholder="Код подтверждения"
+              value={formData.verifyCode}
+              onChange={handleChange}
+              required
+            />
+          </>
         )}
         <button type="submit">
           {!isValid ? "Регистрация" : "Подтвердить"}
         </button>
+        {!isValid && (
+          <p>
+            Уже есть аккаунт? <Link to="/login">Войти</Link>
+          </p>
+        )}
       </form>
     </>
   );

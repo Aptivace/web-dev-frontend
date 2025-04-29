@@ -21,7 +21,6 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         // Если обновление токена не удалось, перенаправляем на страницу входа
-        window.location.href = "/#/login";
         return Promise.reject(refreshError);
       }
     }

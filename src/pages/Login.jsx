@@ -1,13 +1,13 @@
 import React from "react";
 import LoginForm from "../ui/LoginForm/LoginForm";
-import { Link } from "react-router-dom";
+import styles from "./Styles.module.css";
 
 const Login = () => {
   return (
-    <>
+    <div className={styles.auth_container}>
       <LoginForm />
-      <Link to="/register">Зарегаться</Link>
-    </>
+      <img src="/images/cubicBackground.webp" alt="" />
+    </div>
   );
 };
 

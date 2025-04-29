@@ -1,20 +1,37 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import styles from "./Styles.module.css";
 import useMessageStore from "../../store/messageStore";
-import axios from "../../api/axios";
 import useActiveChatStore from "../../store/activeChatStore";
 
 const Prompt = () => {
-  const { messages, addMessage, updateBotMessage } = useMessageStore();
+  const { messages, addMessage } = useMessageStore();
   const { activeChat } = useActiveChatStore();
 
   const [promptText, setPromptText] = useState("");
+  const textareaRef = useRef();
 
   const handleChange = (e) => {
     setPromptText(e.target.value);
   };
+
+  const adjustTextareaHeight = () => {
+    if (textareaRef.current) {
+      // Сбрасываем высоту, чтобы она могла уменьшаться
+      textareaRef.current.style.height = "auto";
+      // Устанавливаем новую высоту на основе scrollHeight
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    setPromptText("");
+  }, [activeChat]);
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [promptText]);
 
   const [isError, setIsError] = useState();
 
@@ -28,22 +45,28 @@ const Prompt = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await sendMessage();
-    console.log(messages);
     setPromptText("");
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "70px";
+    }
+    await sendMessage();
   };
 
   return (
     <>
       {activeChat && (
         <form onSubmit={handleSubmit} className={styles.prompt}>
-          <input
-            type="text"
-            value={promptText}
-            onChange={handleChange}
-            placeholder="Введите запрос..."
-            required
-          />
+          <div className={styles.container}>
+            <textarea
+              type="text"
+              value={promptText}
+              onChange={handleChange}
+              placeholder="Введите запрос..."
+              required
+              ref={textareaRef}
+              style={{ height: "70px" }}
+            />
+          </div>
           <button>
             <FaArrowRight />
           </button>

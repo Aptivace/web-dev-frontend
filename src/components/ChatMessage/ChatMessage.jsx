@@ -1,8 +1,5 @@
-import React from "react";
 import styles from "./Styles.module.css";
-import { useState } from "react";
-import { delay, motion } from "framer-motion";
-import useActiveChatStore from "../../store/activeChatStore";
+import { motion } from "framer-motion";
 
 const UserMessage = ({ user_message, bot_message, chatName, siteLink }) => {
   return (

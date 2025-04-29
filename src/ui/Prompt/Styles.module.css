@@ -1,22 +1,27 @@
 .prompt {
+  /* position: fixed; */
   display: flex;
   grid-row: 2;
   justify-content: center;
   height: 70px;
   margin-bottom: 50px;
+  position: relative;
 
   label {
     display: flex;
   }
 
-  input {
-    width: 80%;
+  textarea {
+    width: 100%;
+    height: auto;
     font-size: 20px;
     padding: 20px;
     border: 2px solid var(--surface);
     border-radius: 10px;
     outline: none;
     color: var(--text);
+    resize: none;
+    max-height: 300px;
 
     &:valid ~ button {
       background-color: var(--green);
@@ -32,6 +37,7 @@
     border-radius: 10px;
     transition: 0.3s;
     color: var(--text);
+    /* height: 70px; */
   }
 }
 
@@ -39,4 +45,10 @@
   position: fixed;
   top: 0 !important;
   bottom: 0 !important;
+}
+.container {
+  display: flex;
+  align-items: flex-end;
+  width: 80%;
+  transform: translateY(10px);
 }

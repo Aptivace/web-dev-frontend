@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useChatStore from "../../store/chatStore";
 import ChatButton from "../../ui/ChatButton/ChatButton";
 import styles from "./Styles.module.css";

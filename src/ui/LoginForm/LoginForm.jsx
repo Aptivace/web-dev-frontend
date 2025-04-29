@@ -1,7 +1,5 @@
-import React from "react";
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaUser, FaEyeSlash, FaEye } from "react-icons/fa";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./Styles.module.css";
 import axios from "../../api/axios";
 
@@ -11,12 +9,9 @@ const LoginForm = () => {
     password: "",
   });
 
-  const verifyCodeRef = useRef();
-
   const navigate = useNavigate();
 
-  const [isValid, setIsValid] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   const submitForm = async () => {
     try {
@@ -28,7 +23,29 @@ const LoginForm = () => {
       console.log(resData);
       navigate("/chats");
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        switch (error.response.status) {
+          case 401:
+            setErrorText("Неверные логин или пароль");
+            break;
+          case 403:
+            setErrorText("Почта не подтверждена!");
+            break;
+          case 408:
+            setErrorText(
+              "Время на подтверждение почты вышло. Аккаунт был удален! Зарегистрируйтесь заново",
+            );
+            break;
+          case 422:
+            setErrorText("Неверные логин или пароль");
+            break;
+          default:
+            setErrorText("Произошла неизвестная ошибка!");
+            break;
+        }
+      } else {
+        setErrorText("Произошла неизвестная ошибка!");
+      }
     }
   };
 
@@ -43,34 +60,29 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.login_form}>
-      {!isValid ? (
-        <>
-          <input
-            type="email"
-            name="email"
-            placeholder="Почта"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className={isError ? styles.error : null}
-          />
-          {isError && <label>текст ошибки</label>}
-          <input
-            type="password"
-            name="password"
-            placeholder="Пароль"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className={isError ? styles.error : null}
-          />
-          {isError && <label>текст ошибки</label>}
-        </>
-      ) : (
-        <input type="text" ref={verifyCodeRef} placeholder="huy" />
-      )}
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h1>Вход</h1>
+      <input
+        type="email"
+        name="email"
+        placeholder="Почта"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Пароль"
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
+      {errorText && <p className={styles.errorText}>{errorText}</p>}
       <button type="submit">Войти</button>
+      <p>
+        Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+      </p>
     </form>
   );
 };
