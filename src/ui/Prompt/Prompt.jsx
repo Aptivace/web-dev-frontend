@@ -4,10 +4,12 @@ import { FaArrowRight } from "react-icons/fa6";
 import styles from "./Styles.module.css";
 import useMessageStore from "../../store/messageStore";
 import useActiveChatStore from "../../store/activeChatStore";
+import useUserStore from "../../store/userStore.js";
 
 const Prompt = () => {
   const { messages, addMessage } = useMessageStore();
   const { activeChat } = useActiveChatStore();
+  const { balanceDecrement } = useUserStore();
 
   const [promptText, setPromptText] = useState("");
   const textareaRef = useRef();
@@ -38,6 +40,7 @@ const Prompt = () => {
   const sendMessage = async () => {
     try {
       await addMessage(promptText, activeChat.id);
+      balanceDecrement();
     } catch (err) {
       console.log(err);
     }

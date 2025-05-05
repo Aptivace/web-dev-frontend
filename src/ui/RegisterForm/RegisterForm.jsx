@@ -17,7 +17,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const [isValid, setIsValid] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const [validateError, setValidateError] = useState({
     email: "",
@@ -37,13 +37,16 @@ const RegisterForm = () => {
         password_confirmation: formData.passwordConfirm,
         invite_code: formData.inviteCode,
       });
+
       const resData = await res.data;
       console.log(resData);
+      setIsSuccess(true);
     } catch (err) {
-      setIsError(true);
+      setIsSuccess(false);
       if (!err.response) {
-        return console.log("pidors");
+        return;
       }
+      console.log(err.response.data);
       if (err.response.status === 422) {
         if (err.response.data.errors.email) {
           setValidateError((prev) => ({
@@ -66,9 +69,6 @@ const RegisterForm = () => {
         }));
       }
     }
-    if (!isError) {
-      setIsValid(true);
-    }
   };
 
   const submitLastStep = async () => {
@@ -88,10 +88,12 @@ const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
+    if (isSuccess) {
       return submitLastStep();
     }
-    submitFirstStep();
+    if (isValid) {
+      submitFirstStep();
+    }
   };
 
   const validate = () => {
@@ -123,7 +125,7 @@ const RegisterForm = () => {
     // Confirm password validation
     if (
       formData.passwordConfirm &&
-      formData.passwordConfirm != formData.password
+      formData.passwordConfirm !== formData.password
     ) {
       setValidateError((prev) => ({
         ...prev,
@@ -132,6 +134,12 @@ const RegisterForm = () => {
     } else {
       setValidateError((prev) => ({ ...prev, passwordConfirm: "" }));
     }
+
+    if (validateError.password && validateError.password) {
+      return setIsValid(false);
+    }
+    setIsValid(true);
+
   };
 
   const handleChange = (e) => {
@@ -146,7 +154,7 @@ const RegisterForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.login_form}>
-        {!isValid ? (
+        {!isSuccess ? (
           <>
             <h1>Регистрация</h1>
             <input

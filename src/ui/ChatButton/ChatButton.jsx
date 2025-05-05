@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Styles.module.css";
 import { FaTrash } from "react-icons/fa6";
 import { useState } from "react";
@@ -17,11 +16,12 @@ const ChatButton = ({ id, name, site_link }) => {
   const fetchMessages = async () => {
     if (id !== activeChat.id) {
       try {
-        const res = await axios.get(`/chat/${id}`);
+        console.log(id);
+        const res = await axios.get(`/chats/${id}`);
         const resData = await res.data;
         setActiveChatId({ id: id, name: name, siteLink: site_link });
-        setMessages(resData.data.items);
-        console.log(resData.data.items);
+        setMessages(resData.data.messages);
+        console.log(resData.data.messages);
       } catch (err) {
         console.log(err);
       }

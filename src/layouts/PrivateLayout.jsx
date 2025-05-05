@@ -14,7 +14,8 @@ const PrivateLayout = () => {
       try {
         const res = await axios.get("/profile");
         const resData = await res.data;
-        setUserData(resData.data.profile);
+        console.log(resData);
+        setUserData(resData.data);
         setIsAuth(true);
       } catch (error) {
         console.log(error);

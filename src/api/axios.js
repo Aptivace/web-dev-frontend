@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "/public/api",
   withCredentials: true,
 });
 
@@ -13,7 +13,7 @@ api.interceptors.response.use(
       originalRequest._retry = true; // Помечаем запрос как повторный
       try {
         const res = await axios.post(
-          "http://localhost:8000/api/auth/refresh",
+          "/public/api/auth/refresh",
           null,
           { withCredentials: true }
         );

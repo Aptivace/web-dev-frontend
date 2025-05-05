@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Styles.module.css";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import axios from "../../api/axios";
 import useChatStore from "../../store/chatStore";
+import useUserStore from "../../store/userStore.js";
 
 const NewSiteModal = ({ setIsClicked }) => {
   const modalRef = useRef();
@@ -12,6 +13,7 @@ const NewSiteModal = ({ setIsClicked }) => {
   });
 
   const { addChat } = useChatStore();
+  const { balanceDecrement } = useUserStore();
 
   useEffect(() => {
     let handler = (e) => {
@@ -28,9 +30,10 @@ const NewSiteModal = ({ setIsClicked }) => {
 
   const submitName = async () => {
     try {
-      const res = await axios.post("/chat", { name: formData.chatName });
+      const res = await axios.post("/chats", { name: formData.chatName });
       const resData = await res.data;
       addChat(resData.data);
+      balanceDecrement();
       return true;
     } catch (err) {
       console.log(err);

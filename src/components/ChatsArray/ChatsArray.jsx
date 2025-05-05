@@ -11,10 +11,9 @@ const ChatsArray = () => {
     const fetchChats = async () => {
       const res = await axios.get("/chats");
       const resData = await res.data;
-      setChats(resData.data.items);
+      setChats(resData.data);
     };
     fetchChats();
-    console.log(chats);
   }, []);
 
   return (

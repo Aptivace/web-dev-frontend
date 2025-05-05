@@ -1,0 +1,9 @@
+.timer {
+    background-color: var(--lavender);
+    color: var(--surface0);
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -23,7 +23,7 @@ const useMessageStore = create(
         });
       });
       try {
-        const res = await axios.post(`/chat/${chatId}/send`, {
+        const res = await axios.post(`/chats/${chatId}/messages`, {
           user_message: userMessage,
         });
         const resData = await res.data;
